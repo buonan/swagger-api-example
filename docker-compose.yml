@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+      - 28017:28017
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    networks:
+      - backend
+
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - 8082:8081
+    restart: always
+    depends_on:
+      - mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:27017/
+    networks:
+      - backend
+
+networks:
+  backend:

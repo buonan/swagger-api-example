@@ -9,3 +9,13 @@ npm i -S tsoa swagger-ui-express
 npm i -D @types/swagger-ui-express concurrently
 npm i -D ts-node nodemon
 ```
+
+# How build
+npm install
+
+# How to run
+```
+npm run swagger
+npm run compile
+npm start
+```
